@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Arnav Jain — algorithmic trading systems engineer. 22 production MQL5 expert advisors, ML validation pipelines, headless MT5 test automation.">
+<meta property="og:title" content="Arnav Jain — Trading Systems">
+<meta property="og:description" content="22 production MQL5 expert advisors, ML validation pipelines, and headless MT5 test automation.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' rx='3' fill='%2317475F'/><path d='M3 11.5L6 7l2.5 3L13 4.5' stroke='%23D99A4E' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+<title>Arnav Jain Trading Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
+<style>
+html{color-scheme:light dark}
+img{max-width:100%}
+[hidden]{display:none!important}
+
+:root{
+  --bg:#F5F7F9; --surface:#FFFFFF; --surface-2:#EDF1F4;
+  --ink:#101821; --ink-2:#36434F; --muted:#64727F;
+  --rule:#DDE3E9; --rule-strong:#C3CDD6;
+  --accent:#17475F; --accent-soft:#E3EDF2;
+  --signal:#A8631B; --signal-soft:#F6EADC;
+  --pos:#1F6B4D;
+  --display:'Archivo',system-ui,-apple-system,sans-serif;
+  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0C1116; --surface:#131B23; --surface-2:#1A242E;
+    --ink:#E9EEF3; --ink-2:#BCC8D3; --muted:#8B9AA8;
+    --rule:#223040; --rule-strong:#31445A;
+    --accent:#79B2CC; --accent-soft:#16242E;
+    --signal:#D99A4E; --signal-soft:#2A2016;
+    --pos:#58B98C;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0C1116; --surface:#131B23; --surface-2:#1A242E;
+  --ink:#E9EEF3; --ink-2:#BCC8D3; --muted:#8B9AA8;
+  --rule:#223040; --rule-strong:#31445A;
+  --accent:#79B2CC; --accent-soft:#16242E;
+  --signal:#D99A4E; --signal-soft:#2A2016;
+  --pos:#58B98C;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:var(--body); font-size:16.5px; line-height:1.62;
+  margin:0; padding-inline:20px; padding-block:0;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:860px;margin:0 auto}
+h1,h2,h3,.lbl{font-family:var(--display)}
+h2{font-size:1.02rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600;
+   color:var(--muted);margin:0 0 20px;padding-bottom:9px;border-bottom:1px solid var(--rule)}
+h3{font-size:1.1rem;font-weight:600;margin:0 0 6px;letter-spacing:-.01em;text-wrap:balance}
+p{margin:0 0 14px;max-width:66ch}
+a{color:var(--accent)}
+code,.mono{font-family:var(--mono);font-size:.84em;font-variant-numeric:tabular-nums}
+
+/* masthead */
+header{padding-block:56px 40px;border-bottom:2px solid var(--ink)}
+.eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--signal);margin:0 0 16px;font-weight:500}
+h1{font-size:clamp(2rem,6vw,2.9rem);line-height:1.08;font-weight:700;letter-spacing:-.025em;
+   margin:0 0 18px;text-wrap:balance}
+.standfirst{font-size:1.14rem;color:var(--ink-2);max-width:60ch;margin:0}
+.standfirst b{color:var(--ink);font-weight:600}
+
+section{padding-block:44px}
+section+section{border-top:1px solid var(--rule)}
+
+/* metrics band */
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(142px,1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule);margin-top:4px}
+.metric{background:var(--surface);padding:18px 16px}
+.metric .n{font-family:var(--mono);font-size:1.52rem;font-weight:700;color:var(--ink);
+  line-height:1.1;font-variant-numeric:tabular-nums;display:block}
+.metric .k{font-family:var(--display);font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--muted);margin-top:7px;display:block;font-weight:500}
+
+/* capability rows */
+.cap{display:grid;grid-template-columns:168px 1fr;gap:22px;padding-block:18px;
+  border-bottom:1px solid var(--rule)}
+.cap:last-child{border-bottom:0;padding-bottom:0}
+.cap-k{font-family:var(--display);font-weight:600;font-size:.84rem;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--accent);padding-top:3px}
+.cap-v{margin:0;color:var(--ink-2)}
+.cap-v b{color:var(--ink);font-weight:600}
+
+/* case studies */
+.case{background:var(--surface);border:1px solid var(--rule);border-left:3px solid var(--signal);
+  padding:22px 24px;margin-bottom:16px}
+.case:last-child{margin-bottom:0}
+.case .tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);display:block;margin-bottom:9px}
+.case p{margin:0;color:var(--ink-2);font-size:.97rem}
+.case p+p{margin-top:10px}
+.case .takeaway{color:var(--ink);border-top:1px solid var(--rule);padding-top:10px;margin-top:12px;
+  font-size:.92rem}
+.case .takeaway b{font-family:var(--display);font-size:.72rem;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--signal);display:block;margin-bottom:3px;font-weight:600}
+
+/* stack */
+.stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:26px}
+.stack h3{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:9px;font-weight:600}
+.stack ul{margin:0;padding:0;list-style:none}
+.stack li{font-family:var(--mono);font-size:.82rem;color:var(--ink-2);padding:3px 0;
+  border-bottom:1px dotted var(--rule)}
+.stack li:last-child{border-bottom:0}
+
+/* approach */
+.approach{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule)}
+.ap{background:var(--surface);padding:20px}
+.ap .num{font-family:var(--mono);font-size:.7rem;color:var(--signal);letter-spacing:.1em;
+  display:block;margin-bottom:8px;font-weight:700}
+.ap p{font-size:.93rem;color:var(--ink-2);margin:6px 0 0}
+
+/* contact */
+.contact{background:var(--accent-soft);border:1px solid var(--rule-strong);padding:26px 24px;
+  margin-top:8px}
+.contact p{margin:0 0 14px}
+.contact .row{display:flex;flex-wrap:wrap;gap:10px 26px;font-family:var(--mono);font-size:.86rem}
+.contact .row span{color:var(--muted)}
+.contact .row b{color:var(--ink);font-weight:500}
+
+footer{padding-block:30px 46px;border-top:1px solid var(--rule);color:var(--muted);
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.04em}
+
+@media (max-width:620px){
+  .cap{grid-template-columns:1fr;gap:6px}
+  .cap-k{padding-top:0}
+  header{padding-block:40px 32px}
+}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Algorithmic Trading Systems · Engineering Dossier</p>
+  <h1>I build trading systems that tell you the truth about themselves.</h1>
+  <p class="standfirst">Eighteen months of full-time build on production execution code: <b>22 MetaTrader 5 expert advisors</b>, ML validation pipelines, and the test infrastructure that proves whether a strategy is real before a cent is risked on it.</p>
+</header>
+
+<section>
+  <h2>Built, shipped, measured</h2>
+  <div class="metrics">
+    <div class="metric"><span class="n">22</span><span class="k">MQL5 Expert Advisors</span></div>
+    <div class="metric"><span class="n">17,854</span><span class="k">Lines of MQL5</span></div>
+    <div class="metric"><span class="n">18</span><span class="k">Pine Script systems</span></div>
+    <div class="metric"><span class="n">60+</span><span class="k">Strategies researched</span></div>
+    <div class="metric"><span class="n">6,300</span><span class="k">Monte Carlo lifecycles</span></div>
+    <div class="metric"><span class="n">2</span><span class="k">Live funded accounts</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>What I can build for you</h2>
+
+  <div class="cap">
+    <div class="cap-k">Execution</div>
+    <p class="cap-v">Production <b>MQL5 expert advisors</b> for MT5 — session scheduling, structural and ATR stops, trailing and breakeven logic, partial exits, risk-based position sizing, news guards via the MQL5 economic calendar, Telegram notification, hedging and netting account modes. Built for 24/5 unattended operation.</p>
+  </div>
+  <div class="cap">
+    <div class="cap-k">Research</div>
+    <p class="cap-v">Vectorised backtest engines in <b>Python / NumPy / pandas</b> with realistic fill mechanics — limit orders walked forward rather than filled on the setup bar, per-bar broker spread as the cost model, SL-wins-ties on intrabar ambiguity. Multi-asset tournaments, parameter sweeps, walk-forward optimisation.</p>
+  </div>
+  <div class="cap">
+    <div class="cap-k">Validation</div>
+    <p class="cap-v">Out-of-sample holdouts, <b>block-bootstrap confidence intervals</b>, Monte Carlo on trade sequences, permutation and shuffle controls, cost-stress sensitivity. I treat a backtest as a hypothesis to be attacked, not a result to be presented.</p>
+  </div>
+  <div class="cap">
+    <div class="cap-k">Machine learning</div>
+    <p class="cap-v">Feature engineering and labelling pipelines — MFE/MAE outcome labelling, ~46 engineered features across six blocks, L2 logistic regression, depth-limited trees and <b>LightGBM</b>, measured as lift over a take-every-signal baseline rather than accuracy in a vacuum.</p>
+  </div>
+  <div class="cap">
+    <div class="cap-k">Indicators</div>
+    <p class="cap-v"><b>Pine Script v5/v6</b> indicators and strategies — volume profile and delta-POC reconstruction from lower-timeframe sub-bars, anchored VWAP, volume anomaly detection, session profiling, multi-timeframe via <code>request.security</code> with no repainting.</p>
+  </div>
+  <div class="cap">
+    <div class="cap-k">Infrastructure</div>
+    <p class="cap-v">Headless <b>MT5 automation</b> — compile, backtest and optimise from the command line with no GUI, batch matrices across EA × symbol × timeframe, automated report parsing into comparison tables. Plus a TradingView→MT5 signal bridge for executing chart-side logic on a broker account.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Selected engineering work</h2>
+
+  <div class="case">
+    <span class="tag">Forensic reverse engineering</span>
+    <h3>Recovering an undisclosed proprietary level</h3>
+    <p>A discretionary trader published charts marked with a level he would not explain. I reconstructed the full derivation: a volume-anomaly detector isolating the heaviest institutional candle of the Tokyo session, then the delta-weighted point of control inside that candle's footprint.</p>
+    <p>Initial attempts missed by $20–30. The gap closed to <b>under $1</b> once I identified that the calculation required one-second sub-bar resolution rather than one-minute — a distinction that changes the volume distribution inside each bar from smeared to effectively tick-exact.</p>
+    <div class="takeaway"><b>Why it matters</b>Ported to both Pine Script and a Python replica, then validated by showing the derived level was reproducible at any data resolution — which removed the paid-data dependency entirely.</div>
+  </div>
+
+  <div class="case">
+    <span class="tag">Validation integrity</span>
+    <h3>Killing a +558% backtest</h3>
+    <p>A laddered limit-order strategy returned +558% over three years in simulation. The live implementation lost money immediately. Rather than tune the live version, I rebuilt the fill engine with correct limit-order mechanics — orders pre-placed and walked forward, never filled on the bar that generated the signal.</p>
+    <p>The same configuration returned <b>−91%</b>. Every one of six parameter variants lost money. The entire edge had been a single incorrect fill assumption.</p>
+    <div class="takeaway"><b>Why it matters</b>This is the failure mode that destroys retail algorithmic trading, and most developers ship it without knowing. I now run fill-realism as a standing check before any strategy is taken seriously.</div>
+  </div>
+
+  <div class="case">
+    <span class="tag">Quantitative modelling</span>
+    <h3>Pricing a prop-firm challenge as an expected-value problem</h3>
+    <p>Built a complete rule engine for a funding firm's evaluation programme — daily and static drawdown limits, minimum profitable days, phase progression, payout schedules — then wrapped it in a lifecycle Monte Carlo that started a fresh simulated account on every Monday in the dataset.</p>
+    <p><b>6,300 simulated challenges across 33 configurations.</b> The result was decisively negative expected value, and the project was closed before a single fee was paid.</p>
+    <div class="takeaway"><b>Why it matters</b>The deliverable was a defensible "no". Knowing when not to deploy capital is the same engineering discipline as knowing when to.</div>
+  </div>
+
+  <div class="case">
+    <span class="tag">ML rigour</span>
+    <h3>Catching lookahead inside my own pipeline</h3>
+    <p>A classifier over engineered fib-zone features produced a best-leaf win probability of 0.816 — a result good enough to be suspicious. Ablating a single feature that encoded one bar of forward information collapsed it to 0.333.</p>
+    <p>The pipeline now ships with an explicit <code>--exclude-lookahead</code> mode, and all reported figures are generated with it on.</p>
+    <div class="takeaway"><b>Why it matters</b>Subtle lookahead is the most common silent defect in ML-for-trading. The discipline is building the switch that lets you prove its absence.</div>
+  </div>
+
+  <div class="case">
+    <span class="tag">Automation</span>
+    <h3>Headless broker-terminal test automation</h3>
+    <p>MT5's strategy tester has no scripting API. I drove the terminal directly instead — compiling expert advisors through MetaEditor's CLI and running batch backtests through generated configuration files, with no GUI, on macOS under Wine.</p>
+    <p>A ten-run matrix across six strategies, three symbols and five timeframes now executes in <b>under twenty minutes</b> and parses itself into a single comparison table. The equivalent manual process is days of clicking.</p>
+    <div class="takeaway"><b>Why it matters</b>Measurement throughput is the real constraint on strategy development. Making evaluation cheap is what makes honest evaluation possible.</div>
+  </div>
+</section>
+
+<section>
+  <h2>How I work</h2>
+  <div class="approach">
+    <div class="ap">
+      <span class="num">01</span>
+      <h3>Costs before signals</h3>
+      <p>Spread by hour of day, slippage, swap and commission are modelled before a strategy is judged. An edge that only exists at zero cost is not an edge.</p>
+    </div>
+    <div class="ap">
+      <span class="num">02</span>
+      <h3>Pre-registered kill criteria</h3>
+      <p>Thresholds that would end a project are written down before the work starts, so results are not retrofitted to a conclusion.</p>
+    </div>
+    <div class="ap">
+      <span class="num">03</span>
+      <h3>Out-of-sample or it didn't happen</h3>
+      <p>In-sample numbers are a hypothesis. Every claim gets a holdout, a walk-forward, or a confidence interval that excludes zero.</p>
+    </div>
+    <div class="ap">
+      <span class="num">04</span>
+      <h3>Specification first</h3>
+      <p>Every system ships with a written design document and plan. You get the reasoning, not just the binary.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Stack</h2>
+  <div class="stack">
+    <div>
+      <h3>Languages</h3>
+      <ul>
+        <li>MQL5 — 17.8k lines shipped</li>
+        <li>Python 3 — research + tooling</li>
+        <li>Pine Script v5 / v6</li>
+        <li>SQL, Bash</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Quant &amp; data</h3>
+      <ul>
+        <li>NumPy · pandas · SciPy</li>
+        <li>scikit-learn · LightGBM</li>
+        <li>statsmodels · cointegration</li>
+        <li>Monte Carlo · bootstrap</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Platforms</h3>
+      <ul>
+        <li>MetaTrader 5 · MetaEditor</li>
+        <li>TradingView · webhooks</li>
+        <li>Prop-firm rule engines</li>
+        <li>VPS deployment · 24/5 ops</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Markets</h3>
+      <ul>
+        <li>XAUUSD (primary)</li>
+        <li>FX majors &amp; crosses</li>
+        <li>Indices · crude</li>
+        <li>Session &amp; orderflow logic</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Working together</h2>
+  <div class="contact">
+    <p>I take projects where the specification matters — an EA built to a precise brief, a strategy validated properly before capital goes near it, or research infrastructure that makes your own testing faster and more trustworthy.</p>
+    <p>Happy to walk through any of the systems above in a call, including the code and the test harnesses. Scope and price agreed up front.</p>
+    <div class="row">
+      <div><span>Name</span> <b>Arnav Jain</b></div>
+      <div><span>Email</span> <b>aiml@org.getmysaas.ai</b></div>
+      <div><span>Availability</span> <b>Open for contract work</b></div>
+    </div>
+  </div>
+</section>
+
+<footer>Engineering dossier · Prepared October 2026</footer>
+
+</div>
+</body>
+</html>
